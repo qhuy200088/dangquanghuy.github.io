@@ -1,0 +1,289 @@
+/* RESET VÀ PHÔNG NỀN CHUNG */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Consolas', 'Courier New', monospace; /* Phông chữ công nghệ */
+    background-color: #000; /* Nền đen tuyệt đối */
+    color: #fff; /* Chữ trắng mặc định */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* HIỆU ỨNG MATRIX/TUYẾT RƠI (Canvas) */
+#matrix-rain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1; /* Nằm dưới nội dung chính */
+    pointer-events: none; /* Cho phép click xuyên qua canvas */
+}
+
+/* CONTAINER NỘI DUNG CHÍNH */
+.profile-container {
+    position: relative;
+    z-index: 2; /* Nằm trên hiệu ứng Matrix */
+    max-width: 800px;
+    width: 90%;
+    padding: 40px;
+    background: rgba(10, 10, 10, 0.85); /* Nền hơi trong suốt */
+    border: 1px solid #333; /* Viền xám */
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.2), 0 0 40px rgba(0, 255, 0, 0.05); /* Hiệu ứng sáng xanh lá công nghệ */
+    border-radius: 5px;
+}
+
+/* TIÊU ĐỀ GLITCH EFFECT (Hiệu ứng lỗi) */
+.glitch {
+    font-size: 3em;
+    text-align: center;
+    color: #fff;
+    text-shadow: 
+        -2px -2px 0px #0ff, 
+        2px 2px 0px #f00;
+    letter-spacing: 2px;
+    animation: text-glitch 4s infinite linear alternate;
+}
+
+@keyframes text-glitch {
+    0% { transform: translate(1px, 1px); }
+    25% { transform: translate(-2px, 0); }
+    50% { transform: translate(1px, -1px); }
+    75% { transform: translate(-1px, 2px); }
+    100% { transform: translate(2px, -1px); }
+}
+
+/* SUBTITLE VÀ DIVIDER */
+.subtitle {
+    text-align: center;
+    color: #aaa;
+    margin-top: -10px;
+    text-transform: uppercase;
+    font-size: 0.9em;
+}
+
+.divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, #0f0, transparent);
+    margin: 20px 0 30px 0;
+}
+
+/* CÁC PHẦN NỘI DUNG */
+section {
+    margin-bottom: 40px;
+    padding: 20px;
+    border: 1px dashed #333;
+    background: rgba(10, 10, 10, 0.5);
+}
+
+h2 {
+    color: #0f0; /* Màu xanh lá công nghệ */
+    font-size: 1.5em;
+    border-bottom: 1px solid #0f0;
+    padding-bottom: 5px;
+    margin-top: 0;
+}
+
+.about-me p {
+    line-height: 1.6;
+    color: #ccc;
+    text-align: justify;
+}
+
+/* NÚT XÃ HỘI VÀ DONATE */
+.links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.social-button {
+    text-decoration: none;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    border: 2px solid;
+    cursor: pointer;
+}
+
+.social-button i {
+    margin-right: 10px;
+}
+
+/* Màu cho các nút xã hội */
+.facebook { background-color: #3b5998; border-color: #3b5998; color: #fff; }
+.tiktok { background-color: #000; border-color: #000; color: #fff; }
+.telegram { background-color: #0088cc; border-color: #0088cc; color: #fff; }
+.github { background-color: #6e5494; border-color: #6e5494; color: #fff; }
+.instagram { background-color: #E1306C; border-color: #E1306C; color: #fff; }
+
+
+/* Nút Donate Nổi Bật */
+.donate {
+    background-color: #ffaa00; /* Màu vàng cam nổi bật */
+    border-color: #ffaa00;
+    color: #000; 
+    box-shadow: 0 0 10px #ffaa00;
+}
+
+/* Hiệu ứng Hover */
+.social-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 255, 0, 0.4);
+    filter: brightness(1.2);
+}
+
+.donate:hover {
+    box-shadow: 0 5px 20px #ffaa00;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid #333;
+}
+
+.footer-text {
+    color: #555;
+    font-size: 0.8em;
+}
+
+/* NÚT ĐIỀU KHIỂN NHẠC NỀN */
+#audio-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #0f0;
+    color: #000;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.2em;
+    cursor: pointer;
+    box-shadow: 0 0 10px #0f0, 0 0 20px #0f0;
+    transition: transform 0.3s, opacity 0.3s;
+    z-index: 100;
+}
+
+#audio-toggle:hover {
+    transform: scale(1.1);
+}
+
+/* MODAL (POP-UP) STYLES */
+.modal {
+    display: none; /* Ẩn theo mặc định */
+    position: fixed; 
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.9); /* Nền đen mờ */
+}
+
+.modal-content {
+    background-color: #111;
+    margin: 15% auto; /* 15% từ trên xuống và căn giữa */
+    padding: 30px;
+    border: 2px solid #0f0; /* Viền xanh lá công nghệ */
+    width: 80%;
+    max-width: 700px;
+    box-shadow: 0 0 30px rgba(0, 255, 0, 0.4);
+    position: relative;
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.close-button {
+    color: #0f0;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #fff;
+    text-decoration: none;
+}
+
+.support-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.support-item {
+    border: 1px dashed #333;
+    padding: 15px;
+}
+
+.support-item h3 {
+    color: #0ff; /* Màu xanh cyan */
+    margin-bottom: 10px;
+    border-bottom: 1px dashed #333;
+    padding-bottom: 5px;
+}
+
+.wallet-address {
+    width: 100%;
+    padding: 10px;
+    background: #000;
+    color: #0f0;
+    border: 1px solid #0f0;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 0.8em;
+    font-family: monospace;
+    overflow-x: auto;
+}
+
+.copy-button {
+    background-color: #0f0;
+    color: #000;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.copy-button:hover {
+    background-color: #fff;
+    box-shadow: 0 0 10px #0f0;
+}
+
+/* MEDIA QUERIES (Thiết bị nhỏ hơn) */
+@media (max-width: 600px) {
+    .glitch {
+        font-size: 2em;
+    }
+    .profile-container {
+        padding: 20px;
+    }
+    .links-grid {
+        grid-template-columns: 1fr;
+    }
+    .support-options {
+        grid-template-columns: 1fr;
+    }
+}
