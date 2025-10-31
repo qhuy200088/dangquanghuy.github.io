@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ĐẶNG QUANG HUY - CYBER PROFILE</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <canvas id="matrix-rain"></canvas>
+
+    <div class="profile-container">
+        
+        <header>
+            <h1 class="glitch" data-text="ĐẶNG QUANG HUY">ĐẶNG QUANG HUY</h1>
+            <p class="subtitle">KỸ SƯ CÔNG NGHỆ THÔNG TIN - SINH NĂM: 2008 - BIỆT DANH: HYU THEM, HUY TOM</p>
+            <div class="divider"></div>
+        </header>
+
+        <section class="about-me">
+            <h2>// Thông Điệp Cá Nhân</h2>
+            <p>
+                Xin Chào! Đây Là Trang Web Của Tôi Cảm Ơn Đã Ghé Thăm.
+            </p>
+        </section>
+
+        <section class="social-links">
+            <h2>// Kết Nối Mạng Lưới</h2>
+            <div class="links-grid">
+                
+                <a href="https://www.facebook.com/Hyu.Them" target="_blank" class="social-button facebook"><i class="fab fa-facebook-f"></i> Facebook Profile</a>
+                
+                <a href="https://www.tiktok.com/x.hyu.them" target="_blank" class="social-button tiktok"><i class="fab fa-tiktok"></i> TikTok</a>
+                
+                <a href="https://www.telegram.com/quanghyu0" target="_blank" class="social-button telegram"><i class="fab fa-telegram-plane"></i> Telegram</a>
+                
+                <a href="https://github.com/qhuy200088/" target="_blank" class="social-button github"><i class="fab fa-github"></i> GitHub Projects</a>
+                
+                <a href="https://www.instagram.com/hyythm208" target="_blank" class="social-button instagram"><i class="fab fa-instagram"></i> Instagram</a>
+
+                <button id="open-donate-modal" class="social-button donate">
+                    <i class="fas fa-hand-holding-usd"></i> Hỗ Trợ Năng Lượng (Support)
+                </button>
+            </div>
+        </section>
+        
+        <footer>
+            <p class="footer-text">&copy; 2024 Đặng Quang Huy. Giao thức đã được tải lên.</p>
+        </footer>
+    </div>
+
+    <div id="donate-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2><i class="fas fa-bolt"></i> Giao Thức Hỗ Trợ Năng Lượng</h2>
+            <div class="support-options">
+                
+                <div class="support-item">
+                    <h3>MBBank (Ngân Hàng Quân Đội)</h3>
+                    <input type="text" readonly value="20088888866666" id="mbbank-number" class="wallet-address">
+                    <button class="copy-button" onclick="copyAddress('mbbank-number')"><i class="fas fa-copy"></i> Sao chép</button>
+                </div>
+                
+                <div class="support-item">
+                    <h3>Vietcombank (Ngân Hàng Ngoại Thương)</h3>
+                    <input type="text" readonly value="1058825661" id="vcb-number" class="wallet-address">
+                    <button class="copy-button" onclick="copyAddress('vcb-number')"><i class="fas fa-copy"></i> Sao chép</button>
+                </div>
+
+                <div class="support-item">
+                    <h3>Ví Crypto (Phantom/Solana)</h3>
+                    <input type="text" readonly value="DyUoCXAUC78whzWbJhHgmv3RrzcqaTBJu2FzHhZaVRkf" id="phantom-address" class="wallet-address">
+                    <button class="copy-button" onclick="copyAddress('phantom-address')"><i class="fas fa-copy"></i> Sao chép</button>
+                </div>
+
+                <div class="support-item">
+                    <h3>Ví Crypto (Bitcoin)</h3>
+                    <input type="text" readonly value="bc1qgwg8ah9dj44qekaeyxwkchwqkurc78vwyt37vs" id="btc-address" class="wallet-address">
+                    <button class="copy-button" onclick="copyAddress('btc-address')"><i class="fas fa-copy"></i> Sao chép</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <audio id="background-audio" src="neunhungtiecnuoi.mp3" loop autoplay></audio>
+    <button id="audio-toggle" title="Bật/Tắt Nhạc Nền">
+        <i class="fas fa-volume-up"></i>
+    </button>
+    
+    <script>
+        // ---------------------------------------------
+        // HIỆU ỨNG MATRIX/TUYẾT RƠI (GIỮ NGUYÊN)
+        // ---------------------------------------------
+        const canvas = document.getElementById('matrix-rain');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+{}|:"<>?~';
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; 
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#0f0'; 
+            ctx.font = `${fontSize}px monospace`;
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = characters[Math.floor(Math.random() * characters.length)];
+                
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0; 
+                }
+                drops[i]++;
+            }
+        }
+        setInterval(drawMatrix, 50);
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            const newColumns = canvas.width / fontSize;
+            drops.length = Math.floor(newColumns);
+            for (let i = 0; i < drops.length; i++) {
+                if (drops[i] === undefined) { drops[i] = 1; }
+            }
+        });
+
+        // ---------------------------------------------
+        // ĐIỀU KHIỂN NHẠC NỀN & MODAL
+        // ---------------------------------------------
+        const audio = document.getElementById('background-audio');
+        const audioToggle = document.getElementById('audio-toggle');
+        let isPlaying = false;
+        
+        audio.play().then(() => {
+            isPlaying = true;
+            audioToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
+        }).catch(error => {
+            isPlaying = false;
+            audioToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
+        });
+
+        audioToggle.addEventListener('click', () => {
+            if (isPlaying) {
+                audio.pause();
+                audioToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                isPlaying = false;
+            } else {
+                audio.play();
+                audioToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
+                isPlaying = true;
+            }
+        });
+
+        // Chức năng Modal và Copy
+        const modal = document.getElementById("donate-modal");
+        const btn = document.getElementById("open-donate-modal");
+        const span = document.getElementsByClassName("close-button")[0];
+
+        btn.onclick = function() { modal.style.display = "block"; }
+        span.onclick = function() { modal.style.display = "none"; }
+        window.onclick = function(event) {
+            if (event.target == modal) { modal.style.display = "none"; }
+        }
+
+        // Chức năng sao chép địa chỉ ví/tài khoản
+        function copyAddress(elementId) {
+            const copyText = document.getElementById(elementId);
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); 
+            navigator.clipboard.writeText(copyText.value);
+            alert("Đã sao chép thành công: " + copyText.value);
+        }
+    </script>
+</body>
+</html>
